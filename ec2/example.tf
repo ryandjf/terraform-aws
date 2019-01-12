@@ -57,6 +57,12 @@ resource "aws_security_group" "sg_allow_all_ssh" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
+    from_port   = 9090
+    to_port     = 9090
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
     from_port   = 9200
     to_port     = 9200
     protocol    = "tcp"
