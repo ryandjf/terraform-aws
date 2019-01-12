@@ -65,9 +65,16 @@ resource "aws_security_group" "sg_allow_all_ssh" {
 }
 
 resource "aws_instance" "example" {
+#  ami           = "ami-4f508c22" #Ubuntu16.04LTS
   ami           = "ami-0e108df58de522101" # CentOS 7 x86_64 GenericCloud 1805
   instance_type = "t2.large"
   key_name = "project7_aws_cn_north"
   security_groups = ["sg_allow_all_ssh"]
-  count = 2
+  root_block_device {
+    delete_on_termination = true
+    iops = 100
+    volume_type = "gp2"
+    volume_size = 64
+  }
+  count = 1
 }
